@@ -1,0 +1,13 @@
+<%- include("partials/header", { title, currentUser }) %>
+<section class="form-card">
+  <h1>Create a message</h1>
+  <% if (errors.length) { %><ul class="errors"><% errors.forEach((item) => { %><li><%= item.msg %></li><% }) %></ul><% } %>
+  <form action="/messages/new" method="post">
+    <label for="title">Title</label>
+    <input id="title" name="title" maxlength="120" required value="<%= values.title || '' %>">
+    <label for="text">Message</label>
+    <textarea id="text" name="text" rows="8" maxlength="5000" required><%= values.text || '' %></textarea>
+    <button class="button" type="submit">Post message</button>
+  </form>
+</section>
+<%- include("partials/footer") %>

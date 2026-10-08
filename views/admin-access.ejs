@@ -1,0 +1,12 @@
+<%- include("partials/header", { title, currentUser }) %>
+<section class="form-card">
+  <h1>Admin access</h1>
+  <p>Enter the administrator passcode to enable message moderation.</p>
+  <% if (error) { %><p class="errors"><%= error %></p><% } %>
+  <form action="/admin-access" method="post">
+    <label for="passcode">Administrator passcode</label>
+    <input id="passcode" name="passcode" type="password" autocomplete="off" required>
+    <button class="button" type="submit">Enable admin access</button>
+  </form>
+</section>
+<%- include("partials/footer") %>

@@ -1,0 +1,12 @@
+<%- include("partials/header", { title, currentUser }) %>
+<section class="form-card">
+  <h1>Join the club</h1>
+  <p>Enter the club passcode to become a member.</p>
+  <% if (error) { %><p class="errors"><%= error %></p><% } %>
+  <form action="/join" method="post">
+    <label for="passcode">Club passcode</label>
+    <input id="passcode" name="passcode" type="password" autocomplete="off" required>
+    <button class="button" type="submit">Join</button>
+  </form>
+</section>
+<%- include("partials/footer") %>

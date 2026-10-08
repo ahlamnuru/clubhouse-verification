@@ -1,0 +1,33 @@
+<%- include("partials/header", { title, currentUser }) %>
+<section class="intro">
+  <p class="eyebrow">A private place to share</p>
+  <h1>Clubhouse messages</h1>
+  <p>Everyone can read messages. Club members can see who wrote them.</p>
+  <% if (currentUser) { %>
+    <a class="button" href="/messages/new">Create a new message</a>
+  <% } else { %>
+    <a class="button" href="/signup">Sign up to post</a>
+  <% } %>
+</section>
+<section aria-label="Messages" class="messages">
+  <% if (messages.length === 0) { %>
+    <p class="empty">No messages yet. Be the first to post!</p>
+  <% } %>
+  <% messages.forEach((message) => { %>
+    <article class="message">
+      <div class="message-heading">
+        <h2><%= message.title %></h2>
+        <% if (currentUser && (currentUser.isMember || currentUser.isAdmin)) { %>
+          <p class="metadata">By <%= message.User.firstName %> <%= message.User.lastName %> · <time datetime="<%= message.createdAt.toISOString() %>"><%= message.createdAt.toLocaleString() %></time></p>
+        <% } %>
+      </div>
+      <p class="message-text"><%= message.text %></p>
+      <% if (currentUser && currentUser.isAdmin) { %>
+        <form action="/messages/<%= message.id %>/delete" method="post">
+          <button class="danger-button" type="submit">Delete message</button>
+        </form>
+      <% } %>
+    </article>
+  <% }) %>
+</section>
+<%- include("partials/footer") %>

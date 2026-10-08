@@ -1,0 +1,20 @@
+<%- include("partials/header", { title, currentUser }) %>
+<section class="form-card">
+  <h1>Create your account</h1>
+  <p>Signing up does not automatically make you a club member.</p>
+  <% if (errors.length) { %><ul class="errors"><% errors.forEach((item) => { %><li><%= item.msg %></li><% }) %></ul><% } %>
+  <form action="/signup" method="post">
+    <label for="firstName">First name</label>
+    <input id="firstName" name="firstName" autocomplete="given-name" maxlength="60" required value="<%= values.firstName || '' %>">
+    <label for="lastName">Last name</label>
+    <input id="lastName" name="lastName" autocomplete="family-name" maxlength="60" required value="<%= values.lastName || '' %>">
+    <label for="email">Email (username)</label>
+    <input id="email" name="email" type="email" autocomplete="email" maxlength="254" required value="<%= values.email || '' %>">
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="72" required>
+    <label for="confirmPassword">Confirm password</label>
+    <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" minlength="8" maxlength="72" required>
+    <button class="button" type="submit">Sign up</button>
+  </form>
+</section>
+<%- include("partials/footer") %>
